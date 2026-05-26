@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABACUS CLUB — Code The Future | GEC West Champaran</title>
+  <meta name="description" content="ABACUS CLUB — The elite coding club of Government Engineering College West Champaran. Enter the future of code." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;500;600;700&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            orbitron: ['Orbitron', 'sans-serif'],
+            mono: ['Share Tech Mono', 'monospace'],
+            inter: ['Inter', 'sans-serif'],
+            rajdhani: ['Rajdhani', 'sans-serif'],
+          },
+          colors: {
+            cyan: { 400: '#22d3ee', 500: '#06b6d4', glow: '#00f5ff' },
+            neon: { blue: '#0066ff', purple: '#8b5cf6', pink: '#ec4899' },
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body>
+
+<!-- ===================== CUSTOM CURSOR ===================== -->
+<div id="cursor" class="cursor"></div>
+<div id="cursor-trail" class="cursor-trail"></div>
+
+<!-- ===================== PRELOADER ===================== -->
+<div id="preloader">
+  <canvas id="preloader-canvas"></canvas>
+  <div class="preloader-content">
+    <div class="preloader-logo">
+      <span class="preloader-bracket">[</span>
+      <span class="preloader-text" id="preloader-text">ABACUS</span>
+      <span class="preloader-bracket">]</span>
+    </div>
+    <div class="preloader-status" id="preloader-status">INITIALIZING ABACUS SYSTEM v2.0.26</div>
+    <div class="preloader-bar-wrap">
+      <div class="preloader-bar" id="preloader-bar"></div>
+    </div>
+    <div class="preloader-percent" id="preloader-percent">0%</div>
+    <div class="preloader-log" id="preloader-log">
+      <div class="log-line" id="log1">&gt; Booting kernel modules...</div>
+      <div class="log-line" id="log2">&gt; Loading neural networks...</div>
+      <div class="log-line" id="log3">&gt; Establishing secure connection...</div>
+      <div class="log-line" id="log4">&gt; Decrypting elite coder database...</div>
+      <div class="log-line" id="log5">&gt; ACCESS GRANTED. Welcome, Coder.</div>
+    </div>
+    <div class="scan-line"></div>
+  </div>
+</div>
+
+<!-- ===================== MAIN SITE ===================== -->
+<div id="site" style="opacity:0;">
+
+<!-- ===================== NAV ===================== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <span class="nav-bracket">[</span>
+      <span class="nav-logo-text">ABACUS</span>
+      <span class="nav-bracket">]</span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#about" class="nav-link">WHO WE ARE</a>
+      <a href="#terminal" class="nav-link">TERMINAL</a>
+      <a href="#domains" class="nav-link">DOMAINS</a>
+      <a href="#events" class="nav-link">EVENTS</a>
+      <a href="#projects" class="nav-link">PROJECTS</a>
+      <a href="#team" class="nav-link">TEAM</a>
+      <a href="#contact" class="nav-link">CONTACT</a>
+    </div>
+    <a href="#join" class="nav-cta">JOIN SYSTEM</a>
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-scanlines"></div>
+  <div class="hero-noise"></div>
+  <div class="hero-grid-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>SYSTEM ONLINE — GEC WEST CHAMPARAN</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="hero-title-line" id="hero-line1">ABACUS</span>
+      <span class="hero-title-line accent" id="hero-line2">CLUB</span>
+    </h1>
+    <div class="hero-tagline">CODE THE <span class="glow-text">FUTURE</span></div>
+    <div class="hero-typing-wrap">
+      <span class="typing-prefix">&gt;&nbsp;</span>
+      <span id="hero-typing" class="hero-typing"></span>
+      <span class="typing-cursor">█</span>
+    </div>
+    <div class="hero-btns">
+      <a href="#about" class="btn-primary" id="btn-enter">
+        <span class="btn-icon">⬡</span> ENTER SYSTEM
+      </a>
+      <a href="#join" class="btn-secondary" id="btn-join">
+        <span class="btn-icon">+</span> JOIN CLUB
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="stat-num" data-count="200">0</span><span class="stat-label">MEMBERS</span></div>
+      <div class="hero-stat-sep"></div>
+      <div class="hero-stat"><span class="stat-num" data-count="50">0</span><span class="stat-label">PROJECTS</span></div>
+      <div class="hero-stat-sep"></div>
+      <div class="hero-stat"><span class="stat-num" data-count="30">0</span><span class="stat-label">EVENTS</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>SCROLL TO EXPLORE</span>
+  </div>
+  <div class="hero-corner top-left"></div>
+  <div class="hero-corner top-right"></div>
+  <div class="hero-corner bottom-left"></div>
+  <div class="hero-corner bottom-right"></div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="section-dark">
+  <div class="section-bg-grid"></div>
+  <div class="about-container">
+    <div class="reveal-block">
+      <div class="section-label">// 01 — SYSTEM LOG</div>
+      <h2 class="section-title reveal-text">WHO WE ARE</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-text">
+        <p class="about-para reveal-para">
+          <span class="para-line">ABACUS CLUB is the elite coding collective of</span>
+          <span class="para-line">Government Engineering College, West Champaran.</span>
+          <span class="para-line">We are builders, hackers, and dreamers.</span>
+        </p>
+        <p class="about-para reveal-para">
+          <span class="para-line">From writing your first line of code to shipping</span>
+          <span class="para-line">production applications — we forge engineers</span>
+          <span class="para-line">who shape the digital future.</span>
+        </p>
+        <div class="about-manifesto">
+          <div class="manifesto-line"><span class="m-bullet">▸</span> We don't just learn. We build.</div>
+          <div class="manifesto-line"><span class="m-bullet">▸</span> We don't just compete. We dominate.</div>
+          <div class="manifesto-line"><span class="m-bullet">▸</span> We don't just code. We engineer the future.</div>
+        </div>
+      </div>
+      <div class="about-visual">
+        <div class="about-holo-card">
+          <div class="holo-inner">
+            <div class="holo-header">
+              <span class="holo-dot red"></span>
+              <span class="holo-dot yellow"></span>
+              <span class="holo-dot green"></span>
+              <span class="holo-title">abacus.sys</span>
+            </div>
+            <div class="holo-code">
+              <div class="code-line"><span class="c-key">class</span> <span class="c-cls">AbacusClub</span> {</div>
+              <div class="code-line">&nbsp;&nbsp;<span class="c-key">constructor</span>() {</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-prop">this</span>.mission = <span class="c-str">"Code The Future"</span>;</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-prop">this</span>.members = <span class="c-num">200</span>+;</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-prop">this</span>.domains = [</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"WebDev"</span>, <span class="c-str">"AI/ML"</span>,</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-str">"DSA"</span>, <span class="c-str">"CyberSec"</span></div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;];</div>
+              <div class="code-line">&nbsp;&nbsp;}</div>
+              <div class="code-line">&nbsp;&nbsp;<span class="c-fn">buildFuture</span>() {</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="c-key">return</span> <span class="c-prop">this</span>.members</div>
+              <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.map(coder => coder.<span class="c-fn">level</span>++)</div>
+              <div class="code-line">&nbsp;&nbsp;}</div>
+              <div class="code-line">}</div>
+              <div class="code-cursor"></div>
+            </div>
+          </div>
+          <div class="holo-glow"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== STORY SCROLL ===================== -->
+<section id="story" class="story-section">
+  <div class="story-item">
+    <div class="story-number">01</div>
+    <div class="story-content">
+      <h3 class="story-title">WE BUILD THE FUTURE</h3>
+      <p class="story-desc">Every line of code we write is a brick in the architecture of tomorrow. We transform ideas into digital realities that matter.</p>
+    </div>
+    <div class="story-line"></div>
+  </div>
+  <div class="story-item">
+    <div class="story-number">02</div>
+    <div class="story-content">
+      <h3 class="story-title">FROM BEGINNERS TO BUILDERS</h3>
+      <p class="story-desc">It doesn't matter where you start. What matters is where you go. Our mentorship transforms first-year students into industry-ready engineers.</p>
+    </div>
+    <div class="story-line"></div>
+  </div>
+  <div class="story-item">
+    <div class="story-number">03</div>
+    <div class="story-content">
+      <h3 class="story-title">ELITE COLLECTIVE</h3>
+      <p class="story-desc">We are more than a club. We are a movement. A brotherhood of coders united by one mission — to code the future.</p>
+    </div>
+    <div class="story-line"></div>
+  </div>
+</section>
+
+<!-- ===================== TERMINAL ===================== -->
+<section id="terminal" class="terminal-section">
+  <div class="terminal-bg"></div>
+  <div class="section-label center">// 02 — COMMAND INTERFACE</div>
+  <h2 class="section-title center reveal-text">INTERACTIVE TERMINAL</h2>
+  <div class="terminal-wrap">
+    <div class="terminal-window">
+      <div class="terminal-header">
+        <div class="terminal-dots">
+          <span class="t-dot red"></span>
+          <span class="t-dot yellow"></span>
+          <span class="t-dot green"></span>
+        </div>
+        <div class="terminal-title">abacus@gec-wc:~$</div>
+        <div class="terminal-status"><span class="status-dot"></span>LIVE</div>
+      </div>
+      <div class="terminal-body" id="terminal-body">
+        <div class="t-line welcome">&gt; ABACUS CLUB TERMINAL v2.0 — Welcome, Elite Coder.</div>
+        <div class="t-line hint">&gt; Type <span class="t-cmd">help</span> to see available commands.</div>
+        <div class="t-line hint">&gt; <span class="t-cursor-blink">_</span></div>
+      </div>
+      <div class="terminal-input-row">
+        <span class="terminal-prompt">abacus@gec:~$&nbsp;</span>
+        <input type="text" id="terminal-input" class="terminal-input" placeholder="type a command..." autocomplete="off" spellcheck="false" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== DOMAINS ===================== -->
+<section id="domains" class="section-dark domains-section">
+  <div class="section-bg-grid"></div>
+  <div class="section-label center">// 03 — OPERATION SECTORS</div>
+  <h2 class="section-title center reveal-text">OUR DOMAINS</h2>
+  <p class="section-sub center">Choose your specialization. Master your craft.</p>
+  <div class="domains-grid">
+
+    <div class="domain-card" data-domain="web">
+      <div class="domain-border-anim"></div>
+      <div class="domain-inner">
+        <div class="domain-icon">⬡</div>
+        <div class="domain-icon-glow"></div>
+        <h3 class="domain-name">WEB DEVELOPMENT</h3>
+        <p class="domain-desc">React, Next.js, Node.js, Full-Stack mastery from pixel to server.</p>
+        <div class="domain-tags">
+          <span>HTML</span><span>CSS</span><span>React</span><span>Node</span>
+        </div>
+        <div class="domain-progress">
+          <div class="dp-bar" style="--w:92%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-card" data-domain="ai">
+      <div class="domain-border-anim"></div>
+      <div class="domain-inner">
+        <div class="domain-icon">◈</div>
+        <div class="domain-icon-glow"></div>
+        <h3 class="domain-name">AI / ML</h3>
+        <p class="domain-desc">Deep Learning, Neural Networks, LLMs — shape the future of intelligence.</p>
+        <div class="domain-tags">
+          <span>Python</span><span>TF</span><span>PyTorch</span><span>LLM</span>
+        </div>
+        <div class="domain-progress">
+          <div class="dp-bar" style="--w:88%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-card" data-domain="app">
+      <div class="domain-border-anim"></div>
+      <div class="domain-inner">
+        <div class="domain-icon">▣</div>
+        <div class="domain-icon-glow"></div>
+        <h3 class="domain-name">APP DEVELOPMENT</h3>
+        <p class="domain-desc">Flutter, React Native, Swift — build cross-platform experiences.</p>
+        <div class="domain-tags">
+          <span>Flutter</span><span>Kotlin</span><span>Swift</span>
+        </div>
+        <div class="domain-progress">
+          <div class="dp-bar" style="--w:80%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-card" data-domain="dsa">
+      <div class="domain-border-anim"></div>
+      <div class="domain-inner">
+        <div class="domain-icon">≋</div>
+        <div class="domain-icon-glow"></div>
+        <h3 class="domain-name">DSA & CP</h3>
+        <p class="domain-desc">Algorithms, Data Structures, Competitive Programming at elite level.</p>
+        <div class="domain-tags">
+          <span>C++</span><span>CF</span><span>LC</span><span>CC</span>
+        </div>
+        <div class="domain-progress">
+          <div class="dp-bar" style="--w:95%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-card" data-domain="cyber">
+      <div class="domain-border-anim"></div>
+      <div class="domain-inner">
+        <div class="domain-icon">⬕</div>
+        <div class="domain-icon-glow"></div>
+        <h3 class="domain-name">CYBER SECURITY</h3>
+        <p class="domain-desc">Ethical hacking, CTFs, penetration testing — defend the digital frontier.</p>
+        <div class="domain-tags">
+          <span>CTF</span><span>Kali</span><span>OSINT</span><span>RE</span>
+        </div>
+        <div class="domain-progress">
+          <div class="dp-bar" style="--w:85%"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="domain-card" data-domain="oss">
+      <div class="domain-border-anim"></div>
+      <div class="domain-inner">
+        <div class="domain-icon">◉</div>
+        <div class="domain-icon-glow"></div>
+        <h3 class="domain-name">OPEN SOURCE</h3>
+        <p class="domain-desc">GSoC, Hacktoberfest, real-world contributions that power the world.</p>
+        <div class="domain-tags">
+          <span>GitHub</span><span>GSoC</span><span>PRs</span>
+        </div>
+        <div class="domain-progress">
+          <div class="dp-bar" style="--w:78%"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== EVENTS ===================== -->
+<section id="events" class="events-section">
+  <div class="section-label center">// 04 — MISSION LOG</div>
+  <h2 class="section-title center reveal-text">EVENTS & MISSIONS</h2>
+  <p class="section-sub center">Join the battles that define elite coders.</p>
+  <div class="events-scroll-wrap">
+    <div class="events-track" id="events-track">
+
+      <div class="event-card">
+        <div class="event-tag">HACKATHON</div>
+        <div class="event-num">01</div>
+        <h3 class="event-title">ABACUS HACK</h3>
+        <p class="event-desc">48-hour innovation marathon. Build. Break. Create. Win.</p>
+        <div class="event-meta">
+          <span>⏱ 48H</span><span>👥 Teams of 4</span><span>🏆 ₹50K Prize</span>
+        </div>
+        <div class="event-status upcoming">UPCOMING</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-tag">CONTEST</div>
+        <div class="event-num">02</div>
+        <h3 class="event-title">CODE STORM</h3>
+        <p class="event-desc">3-hour competitive programming blitz. Algorithms under pressure.</p>
+        <div class="event-meta">
+          <span>⏱ 3H</span><span>👤 Solo</span><span>🏆 Certificates</span>
+        </div>
+        <div class="event-status live">MONTHLY</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-tag">WORKSHOP</div>
+        <div class="event-num">03</div>
+        <h3 class="event-title">AI BOOTCAMP</h3>
+        <p class="event-desc">Deep dive into Machine Learning. From theory to deployment.</p>
+        <div class="event-meta">
+          <span>⏱ 3 Days</span><span>👥 Open</span><span>📜 Cert</span>
+        </div>
+        <div class="event-status done">COMPLETED</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-tag">BOOTCAMP</div>
+        <div class="event-num">04</div>
+        <h3 class="event-title">WEB DEV SURGE</h3>
+        <p class="event-desc">Full-stack web development crash course for beginners to pros.</p>
+        <div class="event-meta">
+          <span>⏱ 7 Days</span><span>👥 Open</span><span>💼 Projects</span>
+        </div>
+        <div class="event-status upcoming">UPCOMING</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-tag">TECH TALK</div>
+        <div class="event-num">05</div>
+        <h3 class="event-title">FUTURE STACK</h3>
+        <p class="event-desc">Industry experts on Web3, AI, and the technologies of tomorrow.</p>
+        <div class="event-meta">
+          <span>⏱ 2H</span><span>👥 Open</span><span>🎙 Speakers</span>
+        </div>
+        <div class="event-status live">RECURRING</div>
+      </div>
+
+      <div class="event-card">
+        <div class="event-tag">CTF</div>
+        <div class="event-num">06</div>
+        <h3 class="event-title">HACK THE FLAG</h3>
+        <p class="event-desc">Capture The Flag cybersecurity challenge. Find the flags, win glory.</p>
+        <div class="event-meta">
+          <span>⏱ 24H</span><span>👥 Teams</span><span>🔐 CTF</span>
+        </div>
+        <div class="event-status upcoming">UPCOMING</div>
+      </div>
+
+    </div>
+  </div>
+  <div class="events-nav">
+    <button class="ev-btn" id="ev-prev">←</button>
+    <button class="ev-btn" id="ev-next">→</button>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects" class="section-dark projects-section">
+  <div class="section-bg-grid"></div>
+  <div class="section-label center">// 05 — DEPLOYMENTS</div>
+  <h2 class="section-title center reveal-text">PROJECT SHOWCASE</h2>
+  <div class="projects-filter">
+    <button class="filter-btn active" data-filter="all">ALL</button>
+    <button class="filter-btn" data-filter="web">WEB</button>
+    <button class="filter-btn" data-filter="ai">AI/ML</button>
+    <button class="filter-btn" data-filter="mobile">MOBILE</button>
+    <button class="filter-btn" data-filter="tool">TOOLS</button>
+  </div>
+  <div class="projects-grid" id="projects-grid">
+
+    <div class="project-card" data-cat="web">
+      <div class="project-glitch-border"></div>
+      <div class="project-header">
+        <div class="project-status-dot"></div>
+        <div class="project-type">WEB APP</div>
+        <div class="project-year">2024</div>
+      </div>
+      <div class="project-preview">
+        <div class="project-preview-code">
+          <span>&lt;App /&gt;</span>
+        </div>
+      </div>
+      <h3 class="project-title">CampusBridge</h3>
+      <p class="project-desc">Student placement portal with AI-powered resume analysis and job matching system.</p>
+      <div class="project-stack">
+        <span>React</span><span>Node.js</span><span>MongoDB</span><span>Python</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-link github">⬡ GITHUB</a>
+        <a href="#" class="proj-link demo">▶ LIVE DEMO</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="ai">
+      <div class="project-glitch-border"></div>
+      <div class="project-header">
+        <div class="project-status-dot"></div>
+        <div class="project-type">AI / ML</div>
+        <div class="project-year">2024</div>
+      </div>
+      <div class="project-preview">
+        <div class="project-preview-code">
+          <span>model.predict()</span>
+        </div>
+      </div>
+      <h3 class="project-title">NeuralNote</h3>
+      <p class="project-desc">AI-powered smart notes app that summarizes lectures and generates quiz questions.</p>
+      <div class="project-stack">
+        <span>Python</span><span>FastAPI</span><span>LLM</span><span>React</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-link github">⬡ GITHUB</a>
+        <a href="#" class="proj-link demo">▶ LIVE DEMO</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="mobile">
+      <div class="project-glitch-border"></div>
+      <div class="project-header">
+        <div class="project-status-dot"></div>
+        <div class="project-type">MOBILE</div>
+        <div class="project-year">2023</div>
+      </div>
+      <div class="project-preview">
+        <div class="project-preview-code">
+          <span>flutter run</span>
+        </div>
+      </div>
+      <h3 class="project-title">AttendTrack</h3>
+      <p class="project-desc">Smart attendance tracker for colleges with biometric integration and analytics.</p>
+      <div class="project-stack">
+        <span>Flutter</span><span>Firebase</span><span>Dart</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-link github">⬡ GITHUB</a>
+        <a href="#" class="proj-link demo">▶ LIVE DEMO</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="tool">
+      <div class="project-glitch-border"></div>
+      <div class="project-header">
+        <div class="project-status-dot"></div>
+        <div class="project-type">TOOL</div>
+        <div class="project-year">2024</div>
+      </div>
+      <div class="project-preview">
+        <div class="project-preview-code">
+          <span>./run.sh --exploit</span>
+        </div>
+      </div>
+      <h3 class="project-title">SecScan</h3>
+      <p class="project-desc">Automated web vulnerability scanner for ethical hacking and security audits.</p>
+      <div class="project-stack">
+        <span>Python</span><span>Bash</span><span>Kali</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-link github">⬡ GITHUB</a>
+        <a href="#" class="proj-link demo">▶ DOCS</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="web">
+      <div class="project-glitch-border"></div>
+      <div class="project-header">
+        <div class="project-status-dot"></div>
+        <div class="project-type">WEB APP</div>
+        <div class="project-year">2023</div>
+      </div>
+      <div class="project-preview">
+        <div class="project-preview-code">
+          <span>const future = await code()</span>
+        </div>
+      </div>
+      <h3 class="project-title">CodeCollab</h3>
+      <p class="project-desc">Real-time collaborative code editor with voice chat and AI suggestions.</p>
+      <div class="project-stack">
+        <span>Socket.io</span><span>Monaco</span><span>WebRTC</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-link github">⬡ GITHUB</a>
+        <a href="#" class="proj-link demo">▶ LIVE DEMO</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-cat="ai">
+      <div class="project-glitch-border"></div>
+      <div class="project-header">
+        <div class="project-status-dot"></div>
+        <div class="project-type">AI / ML</div>
+        <div class="project-year">2024</div>
+      </div>
+      <div class="project-preview">
+        <div class="project-preview-code">
+          <span>train(epochs=100)</span>
+        </div>
+      </div>
+      <h3 class="project-title">VisionGrade</h3>
+      <p class="project-desc">Computer vision system that auto-grades handwritten answer sheets with 96% accuracy.</p>
+      <div class="project-stack">
+        <span>CV2</span><span>TensorFlow</span><span>Flask</span>
+      </div>
+      <div class="project-links">
+        <a href="#" class="proj-link github">⬡ GITHUB</a>
+        <a href="#" class="proj-link demo">▶ DEMO</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== TEAM ===================== -->
+<section id="team" class="team-section">
+  <div class="section-label center">// 06 — CORE OPERATORS</div>
+  <h2 class="section-title center reveal-text">MEET THE TEAM</h2>
+  <p class="section-sub center">The elite minds powering ABACUS CLUB.</p>
+
+  <div class="team-grid">
+
+    <div class="team-card faculty">
+      <div class="team-frame"></div>
+      <div class="team-avatar-wrap">
+        <div class="team-avatar">
+          <div class="avatar-initials">AK</div>
+          <div class="avatar-ring"></div>
+          <div class="avatar-ring-2"></div>
+        </div>
+        <div class="team-role-badge">FACULTY</div>
+      </div>
+      <h3 class="team-name">Prof. A. Kumar</h3>
+      <div class="team-role">Faculty Coordinator</div>
+      <div class="team-dept">Dept. of CSE</div>
+      <div class="team-social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Email">@</a>
+      </div>
+    </div>
+
+    <div class="team-card lead">
+      <div class="team-frame"></div>
+      <div class="team-avatar-wrap">
+        <div class="team-avatar">
+          <div class="avatar-initials">RK</div>
+          <div class="avatar-ring"></div>
+          <div class="avatar-ring-2"></div>
+        </div>
+        <div class="team-role-badge lead-badge">LEAD</div>
+      </div>
+      <h3 class="team-name">Rajat Kumar</h3>
+      <div class="team-role">Club Lead</div>
+      <div class="team-dept">CSE — 3rd Year</div>
+      <div class="team-social">
+        <a href="#" aria-label="GitHub">gh</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="Twitter">tw</a>
+      </div>
+    </div>
+
+    <div class="team-card core">
+      <div class="team-frame"></div>
+      <div class="team-avatar-wrap">
+        <div class="team-avatar">
+          <div class="avatar-initials">SG</div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="team-role-badge core-badge">CORE</div>
+      </div>
+      <h3 class="team-name">Saurav Gupta</h3>
+      <div class="team-role">Tech Head</div>
+      <div class="team-dept">CSE — 3rd Year</div>
+      <div class="team-social">
+        <a href="#" aria-label="GitHub">gh</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+
+    <div class="team-card core">
+      <div class="team-frame"></div>
+      <div class="team-avatar-wrap">
+        <div class="team-avatar">
+          <div class="avatar-initials">PM</div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="team-role-badge core-badge">CORE</div>
+      </div>
+      <h3 class="team-name">Priya Mishra</h3>
+      <div class="team-role">Design Head</div>
+      <div class="team-dept">CSE — 2nd Year</div>
+      <div class="team-social">
+        <a href="#" aria-label="GitHub">gh</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+
+    <div class="team-card dev">
+      <div class="team-frame"></div>
+      <div class="team-avatar-wrap">
+        <div class="team-avatar">
+          <div class="avatar-initials">AS</div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="team-role-badge dev-badge">DEV</div>
+      </div>
+      <h3 class="team-name">Amit Singh</h3>
+      <div class="team-role">Full Stack Dev</div>
+      <div class="team-dept">CSE — 3rd Year</div>
+      <div class="team-social">
+        <a href="#" aria-label="GitHub">gh</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+
+    <div class="team-card dev">
+      <div class="team-frame"></div>
+      <div class="team-avatar-wrap">
+        <div class="team-avatar">
+          <div class="avatar-initials">NK</div>
+          <div class="avatar-ring"></div>
+        </div>
+        <div class="team-role-badge dev-badge">DEV</div>
+      </div>
+      <h3 class="team-name">Neha Kumari</h3>
+      <div class="team-role">AI/ML Engineer</div>
+      <div class="team-dept">CSE — 2nd Year</div>
+      <div class="team-social">
+        <a href="#" aria-label="GitHub">gh</a>
+        <a href="#" aria-label="LinkedIn">in</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section id="stats" class="stats-section">
+  <div class="stats-bg"></div>
+  <div class="section-label center">// 07 — SYSTEM METRICS</div>
+  <h2 class="section-title center">ACHIEVEMENTS</h2>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-scanner"></div>
+      <div class="stat-number" data-target="200">0</div>
+      <div class="stat-plus">+</div>
+      <div class="stat-label">MEMBERS</div>
+      <div class="stat-sublabel">active coders</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-scanner"></div>
+      <div class="stat-number" data-target="50">0</div>
+      <div class="stat-plus">+</div>
+      <div class="stat-label">PROJECTS</div>
+      <div class="stat-sublabel">shipped to prod</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-scanner"></div>
+      <div class="stat-number" data-target="30">0</div>
+      <div class="stat-plus">+</div>
+      <div class="stat-label">WORKSHOPS</div>
+      <div class="stat-sublabel">conducted</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-scanner"></div>
+      <div class="stat-number" data-target="10">0</div>
+      <div class="stat-plus">+</div>
+      <div class="stat-label">HACKATHONS</div>
+      <div class="stat-sublabel">organized & won</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-scanner"></div>
+      <div class="stat-number" data-target="500">0</div>
+      <div class="stat-plus">+</div>
+      <div class="stat-label">CONTRIBUTIONS</div>
+      <div class="stat-sublabel">open source PRs</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMUNITY ===================== -->
+<section id="community" class="community-section">
+  <div class="section-label center">// 08 — NETWORK GRID</div>
+  <h2 class="section-title center reveal-text">JOIN THE NETWORK</h2>
+  <p class="section-sub center">Connect with the elite. Plug into the system.</p>
+  <div class="community-grid">
+    <a href="#" class="community-btn discord">
+      <div class="cb-icon">⬡</div>
+      <div class="cb-label">DISCORD</div>
+      <div class="cb-sub">Live Servers</div>
+      <div class="cb-glow"></div>
+    </a>
+    <a href="#" class="community-btn telegram">
+      <div class="cb-icon">◈</div>
+      <div class="cb-label">TELEGRAM</div>
+      <div class="cb-sub">Announcements</div>
+      <div class="cb-glow"></div>
+    </a>
+    <a href="#" class="community-btn github">
+      <div class="cb-icon">◉</div>
+      <div class="cb-label">GITHUB</div>
+      <div class="cb-sub">Open Source</div>
+      <div class="cb-glow"></div>
+    </a>
+    <a href="#" class="community-btn linkedin">
+      <div class="cb-icon">▣</div>
+      <div class="cb-label">LINKEDIN</div>
+      <div class="cb-sub">Professional</div>
+      <div class="cb-glow"></div>
+    </a>
+    <a href="#" class="community-btn instagram">
+      <div class="cb-icon">⬕</div>
+      <div class="cb-label">INSTAGRAM</div>
+      <div class="cb-sub">Behind the Scenes</div>
+      <div class="cb-glow"></div>
+    </a>
+  </div>
+</section>
+
+<!-- ===================== JOIN ===================== -->
+<section id="join" class="join-section">
+  <div class="join-bg"></div>
+  <div class="section-label center">// 09 — CONTACT INTERFACE</div>
+  <h2 class="section-title center reveal-text">ENTER THE SYSTEM</h2>
+  <p class="section-sub center">Ready to code the future? Initiate contact.</p>
+  <div class="join-grid">
+    <div class="join-info">
+      <div class="info-card">
+        <div class="info-header">
+          <span class="info-dot"></span> LOCATION PING
+        </div>
+        <div class="info-body">
+          <p>Government Engineering College</p>
+          <p>West Champaran, Bihar — 845438</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-header">
+          <span class="info-dot"></span> COMMS CHANNEL
+        </div>
+        <div class="info-body">
+          <p>abacusclub@gecwc.ac.in</p>
+          <p>Available: Mon–Sat, 10:00–18:00</p>
+        </div>
+      </div>
+      <div class="info-card">
+        <div class="info-header">
+          <span class="info-dot"></span> SYSTEM STATUS
+        </div>
+        <div class="info-body status-online">
+          <span class="pulse-dot"></span>
+          <span>ALL SYSTEMS OPERATIONAL</span>
+        </div>
+      </div>
+    </div>
+    <div class="join-form-wrap">
+      <form class="join-form" id="join-form">
+        <div class="form-group">
+          <input type="text" id="f-name" class="form-input" placeholder=" " required />
+          <label for="f-name" class="form-label">CALLSIGN (NAME)</label>
+          <div class="form-border-anim"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" id="f-email" class="form-input" placeholder=" " required />
+          <label for="f-email" class="form-label">COMM CHANNEL (EMAIL)</label>
+          <div class="form-border-anim"></div>
+        </div>
+        <div class="form-group">
+          <select id="f-branch" class="form-input form-select" required>
+            <option value="" disabled selected></option>
+            <option>Computer Science</option>
+            <option>Information Technology</option>
+            <option>Electronics</option>
+            <option>Mechanical</option>
+            <option>Civil</option>
+            <option>Electrical</option>
+          </select>
+          <label for="f-branch" class="form-label">SECTOR (BRANCH)</label>
+          <div class="form-border-anim"></div>
+        </div>
+        <div class="form-group">
+          <textarea id="f-msg" class="form-input form-textarea" placeholder=" " required></textarea>
+          <label for="f-msg" class="form-label">TRANSMISSION (MESSAGE)</label>
+          <div class="form-border-anim"></div>
+        </div>
+        <button type="submit" class="btn-primary full-width" id="form-submit">
+          <span>SEND TRANSMISSION</span>
+          <div class="btn-scan"></div>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer id="footer">
+  <div class="footer-noise"></div>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <span class="footer-bracket">[</span>
+      <span class="footer-logo-text">ABACUS</span>
+      <span class="footer-bracket">]</span>
+      <div class="footer-tagline">CODE THE FUTURE</div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-links">
+      <a href="#about">ABOUT</a>
+      <a href="#domains">DOMAINS</a>
+      <a href="#events">EVENTS</a>
+      <a href="#projects">PROJECTS</a>
+      <a href="#team">TEAM</a>
+      <a href="#contact">CONTACT</a>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 ABACUS CLUB — GEC West Champaran</span>
+      <span class="footer-powered">Powered by ABACUS CLUB ⬡</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- end #site -->
+
+<script src="script.js"></script>
+</body>
+</html>
